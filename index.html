@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Adedonha Treino</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1b3d;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 42px;
+    }
+
+    .letra {
+      font-size: 80px;
+      font-weight: bold;
+      background: white;
+      color: #0b1b3d;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timer {
+      font-size: 36px;
+      margin: 20px;
+    }
+
+    button {
+      padding: 12px 18px;
+      margin: 6px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .categorias {
+      max-width: 700px;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    label {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Adedonha Treino</h1>
+
+  <div class="letra" id="letra">?</div>
+
+  <div class="timer" id="timer">60</div>
+
+  <button onclick="sortearLetra()">Sortear letra</button>
+  <button onclick="iniciarTempo()">Iniciar</button>
+  <button onclick="pausarTempo()">Pausar</button>
+  <button onclick="continuarTempo()">Continuar</button>
+  <button onclick="tempoLento()">Tempo lento</button>
+  <button onclick="semTempo()">Sem tempo</button>
+  <button onclick="limpar()">Limpar respostas</button>
+
+  <div class="categorias">
+    <div class="campo">
+      <label>Nome</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>Comida</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>País</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>Animal</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>Objeto</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>Profissão</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>App ou site</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>Vestuário</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>Tema SENAI</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>Ferramenta da Qualidade</label>
+      <input type="text">
+    </div>
+  </div>
+
+  <script>
+    let tempo = 60;
+    let intervalo = null;
+    let velocidade = 1000;
+
+    const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+    function sortearLetra() {
+      const sorteada = letras[Math.floor(Math.random() * letras.length)];
+      document.getElementById("letra").textContent = sorteada;
+    }
+
+    function iniciarTempo() {
+      clearInterval(intervalo);
+      tempo = 60;
+      velocidade = 1000;
+      document.getElementById("timer").textContent = tempo;
+
+      intervalo = setInterval(() => {
+        tempo--;
+        document.getElementById("timer").textContent = tempo;
+
+        if (tempo <= 0) {
+          clearInterval(intervalo);
+          alert("Tempo acabou!");
+        }
+      }, velocidade);
+    }
+
+    function pausarTempo() {
+      clearInterval(intervalo);
+    }
+
+    function continuarTempo() {
+      clearInterval(intervalo);
+
+      intervalo = setInterval(() => {
+        tempo--;
+        document.getElementById("timer").textContent = tempo;
+
+        if (tempo <= 0) {
+          clearInterval(intervalo);
+          alert("Tempo acabou!");
+        }
+      }, velocidade);
+    }
+
+    function tempoLento() {
+      clearInterval(intervalo);
+      velocidade = 2000;
+
+      intervalo = setInterval(() => {
+        tempo--;
+        document.getElementById("timer").textContent = tempo;
+
+        if (tempo <= 0) {
+          clearInterval(intervalo);
+          alert("Tempo acabou!");
+        }
+      }, velocidade);
+    }
+
+    function semTempo() {
+      clearInterval(intervalo);
+      document.getElementById("timer").textContent = "Sem tempo";
+    }
+
+    function limpar() {
+      document.querySelectorAll("input").forEach(input => input.value = "");
+    }
+  </script>
+
+</body>
+</html>

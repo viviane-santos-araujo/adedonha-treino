@@ -1,676 +1,423 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adedonha Treino</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adedonha Treino</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #071735, #102b63);
-      color: white;
-      text-align: center;
-      min-height: 100vh;
-      padding: 30px 15px;
-    }
-
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    .subtitulo {
-      color: #cbd6ff;
-      margin-bottom: 25px;
-    }
-
-    .painel {
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .letra {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: white;
-      color: #071735;
-      font-size: 70px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 20px auto 10px;
-    }
-
-    .timer {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-
-    .botoes {
-      margin: 20px 0;
-    }
-
-    button, select {
-      padding: 12px 16px;
-      margin: 5px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button {
-      background: #ffffff;
-      color: #071735;
-    }
-
-    button:hover {
-      background: #dce6ff;
-    }
-
-    .botao-principal {
-      background: #19d36b;
-      color: white;
-    }
-
-    .botao-alerta {
-      background: #d31035;
-      color: white;
-    }
-
-    .categorias {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      max-width: 850px;
-      margin: 30px auto;
-    }
-
-    .campo {
-      text-align: left;
-      background: rgba(255, 255, 255, 0.08);
-      padding: 12px;
-      border-radius: 10px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-    }
-
-    .status {
-      margin-top: 6px;
-      font-size: 14px;
-      min-height: 20px;
-    }
-
-    .correto {
-      color: #5eff9b;
-    }
-
-    .errado {
-      color: #ff8d8d;
-    }
-
-    .sugestao {
-      color: #ffe56b;
-    }
-
-    .resultado {
-      max-width: 850px;
-      margin: 25px auto;
-      background: rgba(255, 255, 255, 0.12);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: left;
-      display: none;
-    }
-
-    .resultado h2 {
-      text-align: center;
-      margin-top: 0;
-    }
-
-    .metricas {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .metrica {
-      background: rgba(255, 255, 255, 0.12);
-      padding: 15px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .metrica strong {
-      display: block;
-      font-size: 28px;
-      margin-top: 8px;
-    }
-
-    @media (max-width: 700px) {
-      .categorias, .metricas {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 32px;
-      }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#071735,#102b63);
+  color:white;
+  min-height:100vh;
+  text-align:center;
+  padding:25px 15px;
+}
+h1{font-size:42px;margin-bottom:5px}
+.subtitulo{color:#cbd6ff}
+.letra{
+  width:110px;height:110px;border-radius:50%;
+  background:white;color:#071735;
+  font-size:68px;font-weight:bold;
+  display:flex;align-items:center;justify-content:center;
+  margin:20px auto 8px;
+}
+.timer{font-size:36px;margin-bottom:15px}
+button,select{
+  padding:11px 14px;margin:5px;
+  border:none;border-radius:8px;
+  font-weight:bold;cursor:pointer;
+}
+button{background:white;color:#071735}
+button:hover{background:#dce6ff}
+.verde{background:#19d36b;color:white}
+.vermelho{background:#d31035;color:white}
+.amarelo{background:#ffe56b;color:#071735}
+.categorias{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  max-width:900px;
+  margin:25px auto;
+}
+.campo{
+  text-align:left;
+  background:rgba(255,255,255,.09);
+  padding:12px;
+  border-radius:10px;
+}
+label{font-weight:bold;display:block;margin-bottom:6px}
+input{
+  width:100%;padding:12px;border-radius:8px;
+  border:none;font-size:16px;
+}
+.status{margin-top:7px;font-size:14px;min-height:20px}
+.correto{color:#5eff9b}
+.errado{color:#ff8d8d}
+.sugestao{color:#ffe56b}
+.manual{color:#9ee8ff}
+.resultado{
+  display:none;
+  max-width:900px;
+  margin:25px auto;
+  background:rgba(255,255,255,.13);
+  padding:20px;
+  border-radius:12px;
+  text-align:left;
+}
+.resultado h2{text-align:center;margin-top:0}
+.metricas{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.metrica{
+  background:rgba(255,255,255,.13);
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+}
+.metrica strong{
+  display:block;
+  font-size:26px;
+  margin-top:8px;
+}
+.botao-mini{
+  padding:7px 9px;
+  margin-top:7px;
+  font-size:12px;
+}
+@media(max-width:700px){
+  .categorias,.metricas{grid-template-columns:1fr}
+  h1{font-size:32px}
+}
+</style>
 </head>
 
 <body>
-  <div class="painel">
-    <h1>Adedonha Treino</h1>
-    <p class="subtitulo">Treine com tempo normal, tempo lento, pausa e avaliação de desempenho.</p>
 
-    <div class="letra" id="letra">?</div>
-    <div class="timer" id="timer">60</div>
+<h1>Adedonha Treino</h1>
+<p class="subtitulo">Com tempo, pausa, tempo lento, sugestões e avaliação de desempenho.</p>
 
-    <div>
-      <select id="modoTempo">
-        <option value="120">Modo estudo - 120s</option>
-        <option value="60" selected>Modo normal - 60s</option>
-        <option value="30">Modo desafio - 30s</option>
-      </select>
+<div class="letra" id="letra">?</div>
+<div class="timer" id="timer">60</div>
+
+<select id="modoTempo">
+  <option value="120">Modo estudo - 120s</option>
+  <option value="60" selected>Modo normal - 60s</option>
+  <option value="30">Modo desafio - 30s</option>
+</select>
+
+<div>
+  <button class="verde" onclick="novaRodada()">Nova rodada</button>
+  <button onclick="iniciarTempo()">Iniciar</button>
+  <button onclick="pausarTempo()">Pausar</button>
+  <button onclick="continuarTempo()">Continuar</button>
+  <button onclick="tempoLento()">Tempo lento</button>
+  <button onclick="semTempo()">Sem tempo</button>
+  <button class="vermelho" onclick="avaliar()">Avaliar desempenho</button>
+</div>
+
+<div class="categorias" id="categorias"></div>
+
+<div class="resultado" id="resultado"></div>
+
+<script>
+let letraAtual = "";
+let tempoTotal = 60;
+let tempoRestante = 60;
+let intervalo = null;
+let velocidade = 1000;
+let categoriasDaRodada = [];
+let semLimiteDeTempo = false;
+let respostasManuais = {};
+
+const banco = {
+  "Nome feminino": {
+    C:["Camila","Carla","Clara"], J:["Joana","Juliana","Jéssica"], P:["Patrícia","Paula","Priscila"],
+    L:["Larissa","Luana","Lívia"], M:["Maria","Mariana","Marta"], V:["Viviane","Vitória","Vanessa"]
+  },
+  "Nome masculino": {
+    C:["Carlos","Caio","César"], J:["João","José","Júlio"], P:["Pedro","Paulo","Pablo"],
+    L:["Lucas","Luís","Leonardo"], M:["Marcos","Miguel","Mateus"], R:["Rafael","Ricardo","Renan"]
+  },
+  "País": {
+    C:["Canadá","Chile","China","Coreia do Sul","Coreia do Norte","Colômbia"],
+    P:["Portugal","Paraguai","Peru","Polônia","Panamá"],
+    J:["Japão","Jamaica","Jordânia"], B:["Brasil","Bolívia","Bélgica"],
+    A:["Argentina","Angola","Austrália"], M:["México","Moçambique","Marrocos"]
+  },
+  "Animal": {
+    C:["Cachorro","Cavalo","Cobra"], P:["Pato","Porco","Pinguim"],
+    J:["Jiboia","Jacaré","Javali"], L:["Leão","Lobo","Lagarto"],
+    G:["Gato","Galinha","Girafa"], A:["Arara","Anta","Abelha"]
+  },
+  "Comida": {
+    C:["Cuscuz","Carne","Chocolate","Caqui","Cajá","Camarão"],
+    P:["Pizza","Pudim","Pão","Pistache","Pipoca","Peixe","Pastel"],
+    J:["Jaca","Jiló"], L:["Lasanha","Laranja","Lentilha"],
+    M:["Macarrão","Melancia","Mingau"], A:["Arroz","Acarajé","Abacate"]
+  },
+  "Objeto": {
+    C:["Caneta","Cadeira","Copo"], P:["Pente","Prato","Panela","Pneu","Papel","Porta"],
+    J:["Janela","Jarro"], L:["Lápis","Livro","Lanterna"],
+    M:["Mesa","Mochila","Martelo"], R:["Régua","Relógio","Rodo"]
+  },
+  "Vestuário": {
+    C:["Calça","Camisa","Casaco"], P:["Pijama","Pulseira","Paletó"],
+    J:["Jaqueta","Jaleco"], L:["Luva","Lenço"], M:["Meia","Moletom"],
+    S:["Saia","Sandália","Short"]
+  },
+  "Profissão": {
+    C:["Contador","Cozinheiro","Cantor"], P:["Professor","Programador","Padeiro"],
+    J:["Jardineiro","Jornalista","Juiz"], A:["Advogado","Analista","Arquiteto"],
+    E:["Engenheiro","Enfermeiro","Eletricista"], M:["Médico","Motorista","Mecânico"]
+  },
+  "App ou site": {
+    C:["Canva","ChatGPT"], P:["Pinterest","Prime Video"], W:["WhatsApp","Wikipedia"],
+    Y:["YouTube"], G:["Google","Gmail"], I:["Instagram","iFood"], L:["LinkedIn"]
+  },
+  "Ferramenta da Qualidade": {
+    P:["PDCA","Pareto","Plano de ação"], C:["Check-list","Ciclo PDCA"],
+    D:["Diagrama de Ishikawa"], F:["Fluxograma","Folha de verificação"],
+    M:["Matriz GUT"], B:["Brainstorming"], H:["Histograma"], S:["5S"], Q:["5W2H"]
+  },
+  "Tema SENAI": {
+    P:["Produtividade","Processo","PDCA","Plataforma Inovação","Produção"],
+    C:["Curso","Competência","Comunicação empresarial","Comunicação"],
+    E:["Excel","Eficiência","Eficácia"], A:["Aprendizagem","Análise de Dados"],
+    G:["Gestão"], I:["Indicadores","Indústria"], Q:["Qualidade"],
+    S:["SENAI","Sustentabilidade"], T:["Tecnologia","Treinamento"]
+  },
+  "Palavra em inglês": {
+    P:["People","Phone","Police","Power","Paper"], C:["Car","Cloud","Computer","Cat"],
+    B:["Book","Blue"], D:["Dog","Data"], F:["Friend","Food"], W:["Water","Work"],
+    T:["Time","Tree"], L:["Love","Light"], M:["Music","Money"]
+  }
+};
+
+const todasCategorias = Object.keys(banco);
+
+function normalizar(txt){
+  return txt.toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .trim();
+}
+
+function primeiraLetraValida(resposta){
+  return normalizar(resposta).startsWith(normalizar(letraAtual));
+}
+
+function sortearLetra(){
+  const letrasValidas = "ABCDEFGHIJKLMNOPRSTUV".split("");
+  letraAtual = letrasValidas[Math.floor(Math.random()*letrasValidas.length)];
+  document.getElementById("letra").textContent = letraAtual;
+}
+
+function sortearCategorias(){
+  categoriasDaRodada = [...todasCategorias].sort(()=>Math.random()-.5).slice(0,10);
+  respostasManuais = {};
+  const area = document.getElementById("categorias");
+  area.innerHTML = "";
+
+  categoriasDaRodada.forEach((cat,i)=>{
+    area.innerHTML += `
+      <div class="campo">
+        <label>${cat}</label>
+        <input id="resposta-${i}" type="text" autocomplete="off">
+        <div class="status" id="status-${i}"></div>
+        <button class="botao-mini amarelo" onclick="marcarCorreta(${i})">Marcar como correta</button>
+      </div>
+    `;
+  });
+}
+
+function novaRodada(){
+  clearInterval(intervalo);
+  document.getElementById("resultado").style.display="none";
+  semLimiteDeTempo=false;
+  velocidade=1000;
+  tempoTotal=Number(document.getElementById("modoTempo").value);
+  tempoRestante=tempoTotal;
+  document.getElementById("timer").textContent=tempoRestante;
+  sortearLetra();
+  sortearCategorias();
+}
+
+function iniciarTempo(){
+  clearInterval(intervalo);
+  semLimiteDeTempo=false;
+  velocidade=1000;
+  tempoTotal=Number(document.getElementById("modoTempo").value);
+  tempoRestante=tempoTotal;
+  document.getElementById("timer").textContent=tempoRestante;
+  rodarTempo();
+}
+
+function rodarTempo(){
+  clearInterval(intervalo);
+  intervalo=setInterval(()=>{
+    tempoRestante--;
+    document.getElementById("timer").textContent=tempoRestante;
+    if(tempoRestante<=0){
+      clearInterval(intervalo);
+      avaliar();
+      alert("Tempo acabou! Seu desempenho foi avaliado.");
+    }
+  },velocidade);
+}
+
+function pausarTempo(){ clearInterval(intervalo); }
+
+function continuarTempo(){
+  if(!semLimiteDeTempo && tempoRestante>0) rodarTempo();
+}
+
+function tempoLento(){
+  velocidade=2500;
+  if(!semLimiteDeTempo && tempoRestante>0) rodarTempo();
+}
+
+function semTempo(){
+  clearInterval(intervalo);
+  semLimiteDeTempo=true;
+  document.getElementById("timer").textContent="Sem tempo";
+}
+
+function marcarCorreta(i){
+  const input=document.getElementById(`resposta-${i}`);
+  const status=document.getElementById(`status-${i}`);
+
+  if(input.value.trim()===""){
+    status.innerHTML="Preencha algo antes de marcar como correta.";
+    status.className="status errado";
+    return;
+  }
+
+  if(!primeiraLetraValida(input.value)){
+    status.innerHTML=`A resposta não começa com a letra ${letraAtual}.`;
+    status.className="status errado";
+    return;
+  }
+
+  respostasManuais[i]=true;
+  status.innerHTML="Marcada manualmente como correta.";
+  status.className="status manual";
+  avaliar(false);
+}
+
+function avaliar(mostrarSugestoes=true){
+  clearInterval(intervalo);
+
+  let corretas=0, preenchidas=0, invalidas=0, emBranco=0, manuais=0;
+
+  categoriasDaRodada.forEach((cat,i)=>{
+    const input=document.getElementById(`resposta-${i}`);
+    const status=document.getElementById(`status-${i}`);
+    const resp=input.value.trim();
+    const validas=banco[cat][letraAtual] || [];
+    const validasNorm=validas.map(normalizar);
+
+    status.innerHTML="";
+    status.className="status";
+
+    if(resp===""){
+      emBranco++;
+      if(mostrarSugestoes){
+        const sug=validas[0];
+        if(sug){
+          input.value=sug;
+          status.innerHTML=`Sugestão: ${sug}`;
+          status.className="status sugestao";
+        }else{
+          status.innerHTML="Sem sugestão cadastrada.";
+          status.className="status errado";
+        }
+      }
+      return;
+    }
+
+    preenchidas++;
+
+    if(respostasManuais[i]){
+      corretas++;
+      manuais++;
+      status.innerHTML="Marcada manualmente como correta.";
+      status.className="status manual";
+      return;
+    }
+
+    if(validasNorm.includes(normalizar(resp))){
+      corretas++;
+      status.innerHTML="Resposta válida.";
+      status.className="status correto";
+      return;
+    }
+
+    if(!primeiraLetraValida(resp)){
+      invalidas++;
+      status.innerHTML=`Inválida: não começa com a letra ${letraAtual}.`;
+      status.className="status errado";
+      return;
+    }
+
+    invalidas++;
+    const sug=validas.slice(0,3).join(", ");
+    status.innerHTML = sug
+      ? `Não encontrei no banco. Sugestões: ${sug}. Se estiver certa, clique em "Marcar como correta".`
+      : `Não encontrei no banco. Se estiver certa, clique em "Marcar como correta".`;
+    status.className="status errado";
+  });
+
+  const total=categoriasDaRodada.length;
+  const eficacia=Math.round((corretas/total)*100);
+
+  let tempoUsado, eficiencia, produtividade;
+
+  if(semLimiteDeTempo){
+    tempoUsado="sem limite";
+    eficiencia="modo treino";
+    produtividade=`${corretas} respostas válidas`;
+  }else{
+    tempoUsado=tempoTotal-tempoRestante;
+    eficiencia=Math.round((tempoUsado/tempoTotal)*100)+"% do tempo usado";
+    const minutos=Math.max(tempoUsado/60,0.1);
+    produtividade=(corretas/minutos).toFixed(1)+" respostas válidas/min";
+  }
+
+  let mensagem="";
+  if(eficacia>=80) mensagem="Excelente! Você teve alto índice de acertos.";
+  else if(eficacia>=50) mensagem="Bom treino. Você está construindo repertório.";
+  else mensagem="Você ainda está em fase de aquecimento. Use as sugestões para criar memória.";
+
+  document.getElementById("resultado").style.display="block";
+  document.getElementById("resultado").innerHTML=`
+    <h2>Relatório de desempenho</h2>
+
+    <div class="metricas">
+      <div class="metrica">Eficácia<strong>${eficacia}%</strong></div>
+      <div class="metrica">Eficiência<strong>${eficiencia}</strong></div>
+      <div class="metrica">Produtividade<strong>${produtividade}</strong></div>
     </div>
 
-    <div class="botoes">
-      <button onclick="novaRodada()" class="botao-principal">Nova rodada</button>
-      <button onclick="iniciarTempo()">Iniciar</button>
-      <button onclick="pausarTempo()">Pausar</button>
-      <button onclick="continuarTempo()">Continuar</button>
-      <button onclick="tempoLento()">Tempo lento</button>
-      <button onclick="semTempo()">Sem tempo</button>
-      <button onclick="avaliar()" class="botao-alerta">Avaliar desempenho</button>
-    </div>
+    <p><strong>Respostas corretas:</strong> ${corretas}/${total}</p>
+    <p><strong>Corrigidas manualmente:</strong> ${manuais}</p>
+    <p><strong>Respostas preenchidas:</strong> ${preenchidas}</p>
+    <p><strong>Respostas inválidas ou não cadastradas:</strong> ${invalidas}</p>
+    <p><strong>Campos em branco:</strong> ${emBranco}</p>
+    <p><strong>Tempo usado:</strong> ${tempoUsado}</p>
+    <p><strong>Análise:</strong> ${mensagem}</p>
 
-    <div class="categorias" id="categorias"></div>
+    <p><em>Observação: se uma resposta correta não estiver no banco, use “Marcar como correta”. O sistema recalcula seu desempenho.</em></p>
+  `;
+}
 
-    <div class="resultado" id="resultado"></div>
-  </div>
+novaRodada();
+</script>
 
-  <script>
-    let letraAtual = "";
-    let tempoTotal = 60;
-    let tempoRestante = 60;
-    let intervalo = null;
-    let velocidade = 1000;
-    let categoriasDaRodada = [];
-    let semLimiteDeTempo = false;
-
-    const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-
-    const banco = {
-      "Nome feminino": {
-        A: ["Ana", "Amanda", "Alice"],
-        B: ["Bianca", "Bruna", "Beatriz"],
-        C: ["Camila", "Carla", "Clara"],
-        D: ["Daniela", "Débora", "Diana"],
-        E: ["Eduarda", "Elisa", "Ester"],
-        F: ["Fernanda", "Fabiana", "Flávia"],
-        G: ["Gabriela", "Giovana", "Gisele"],
-        H: ["Helena", "Heloísa", "Hilda"],
-        I: ["Isabela", "Iara", "Ingrid"],
-        J: ["Joana", "Juliana", "Jéssica"],
-        L: ["Larissa", "Luana", "Lívia"],
-        M: ["Maria", "Mariana", "Marta"],
-        N: ["Natália", "Nicole", "Naiara"],
-        O: ["Olívia", "Odete"],
-        P: ["Paula", "Patrícia", "Priscila"],
-        R: ["Rafaela", "Renata", "Raquel"],
-        S: ["Sara", "Sofia", "Simone"],
-        T: ["Tatiane", "Talita", "Tainá"],
-        V: ["Viviane", "Vitória", "Vanessa"]
-      },
-
-      "Nome masculino": {
-        A: ["André", "Arthur", "Antônio"],
-        B: ["Bruno", "Breno", "Bernardo"],
-        C: ["Carlos", "Caio", "César"],
-        D: ["Daniel", "Diego", "Davi"],
-        E: ["Eduardo", "Enzo", "Elias"],
-        F: ["Felipe", "Fernando", "Fábio"],
-        G: ["Gabriel", "Gustavo", "Guilherme"],
-        H: ["Henrique", "Heitor"],
-        I: ["Igor", "Isaac", "Ian"],
-        J: ["João", "José", "Júlio"],
-        L: ["Lucas", "Luís", "Leonardo"],
-        M: ["Marcos", "Miguel", "Mateus"],
-        N: ["Nicolas", "Nathan", "Noah"],
-        P: ["Paulo", "Pedro", "Pablo"],
-        R: ["Rafael", "Ricardo", "Renan"],
-        S: ["Samuel", "Sandro", "Sérgio"],
-        T: ["Thiago", "Tomás", "Túlio"],
-        V: ["Victor", "Vinícius", "Valter"]
-      },
-
-      "País": {
-        A: ["Argentina", "Angola", "Austrália"],
-        B: ["Brasil", "Bolívia", "Bélgica"],
-        C: ["Canadá", "Chile", "China"],
-        D: ["Dinamarca"],
-        E: ["Espanha", "Egito", "Equador"],
-        F: ["França", "Finlândia"],
-        G: ["Grécia", "Guatemala", "Gana"],
-        H: ["Honduras", "Hungria"],
-        I: ["Itália", "Índia", "Irlanda"],
-        J: ["Japão", "Jamaica", "Jordânia"],
-        L: ["Líbano", "Luxemburgo", "Lituânia"],
-        M: ["México", "Moçambique", "Marrocos"],
-        N: ["Noruega", "Nigéria", "Nicarágua"],
-        P: ["Portugal", "Paraguai", "Peru"],
-        R: ["Rússia", "Romênia"],
-        S: ["Suécia", "Suíça", "Senegal"],
-        T: ["Turquia", "Tailândia", "Tunísia"],
-        U: ["Uruguai", "Ucrânia"],
-        V: ["Venezuela", "Vietnã"]
-      },
-
-      "Animal": {
-        A: ["Arara", "Anta", "Abelha"],
-        B: ["Baleia", "Bode", "Burro"],
-        C: ["Cachorro", "Cavalo", "Cobra"],
-        D: ["Dinossauro", "Doninha"],
-        E: ["Elefante", "Esquilo"],
-        F: ["Foca", "Formiga", "Flamingo"],
-        G: ["Gato", "Galinha", "Girafa"],
-        H: ["Hipopótamo", "Hiena"],
-        I: ["Iguana", "Impala"],
-        J: ["Jiboia", "Jacaré", "Javali"],
-        L: ["Leão", "Lobo", "Lagarto"],
-        M: ["Macaco", "Mosquito", "Morcego"],
-        N: ["Naja", "Narval"],
-        O: ["Onça", "Orca", "Ovelha"],
-        P: ["Pato", "Porco", "Pinguim"],
-        R: ["Rato", "Raposa", "Rinoceronte"],
-        S: ["Sapo", "Serpente", "Suricato"],
-        T: ["Tigre", "Tubarão", "Tatu"],
-        U: ["Urso", "Urubu"],
-        V: ["Vaca", "Vespa", "Veado"]
-      },
-
-      "Comida": {
-        A: ["Arroz", "Acarajé", "Abacate"],
-        B: ["Bolo", "Banana", "Batata"],
-        C: ["Cuscuz", "Carne", "Chocolate"],
-        D: ["Doce", "Damasco"],
-        E: ["Empada", "Esfiha", "Espaguete"],
-        F: ["Feijão", "Frango", "Farofa"],
-        G: ["Gelatina", "Goiaba", "Granola"],
-        H: ["Hambúrguer"],
-        I: ["Iogurte", "Inhame"],
-        J: ["Jaca", "Jiló"],
-        L: ["Lasanha", "Laranja", "Lentilha"],
-        M: ["Macarrão", "Melancia", "Mingau"],
-        N: ["Nhoque", "Nuggets"],
-        O: ["Ovo", "Omelete"],
-        P: ["Pizza", "Pudim", "Pão"],
-        R: ["Risoto", "Rapadura"],
-        S: ["Sopa", "Sorvete", "Salada"],
-        T: ["Tapioca", "Torta", "Tomate"],
-        U: ["Uva"],
-        V: ["Vatapá", "Vinagrete"]
-      },
-
-      "Objeto": {
-        A: ["Agenda", "Anel", "Apito"],
-        B: ["Bola", "Bolsa", "Balde"],
-        C: ["Caneta", "Cadeira", "Copo"],
-        D: ["Dado", "Dominó"],
-        E: ["Escova", "Espelho", "Envelope"],
-        F: ["Faca", "Fogão", "Fone"],
-        G: ["Garrafa", "Guarda-chuva"],
-        H: ["Helicóptero de brinquedo"],
-        I: ["Imã", "Isqueiro"],
-        J: ["Janela", "Jarro"],
-        L: ["Lápis", "Livro", "Lanterna"],
-        M: ["Mesa", "Mochila", "Martelo"],
-        N: ["Notebook", "Novelo"],
-        O: ["Óculos", "Organizador"],
-        P: ["Pente", "Prato", "Panela"],
-        R: ["Régua", "Relógio", "Rodo"],
-        S: ["Sapato", "Sabonete"],
-        T: ["Tesoura", "Telefone", "Toalha"],
-        V: ["Vassoura", "Violão", "Ventilador"]
-      },
-
-      "Vestuário": {
-        A: ["Anel", "Agasalho"],
-        B: ["Blusa", "Bermuda", "Boné"],
-        C: ["Calça", "Camisa", "Casaco"],
-        E: ["Echarpe"],
-        F: ["Faixa", "Fantasia"],
-        G: ["Gorro", "Gravata"],
-        J: ["Jaqueta", "Jaleco"],
-        L: ["Luva", "Lenço"],
-        M: ["Meia", "Moletom"],
-        P: ["Pijama", "Pulseira"],
-        R: ["Regata", "Roupa"],
-        S: ["Saia", "Sandália", "Short"],
-        T: ["Tênis", "Touca", "Terno"],
-        V: ["Vestido"]
-      },
-
-      "Profissão": {
-        A: ["Advogado", "Analista", "Arquiteto"],
-        B: ["Bombeiro", "Babá", "Bibliotecário"],
-        C: ["Contador", "Cozinheiro", "Cantor"],
-        D: ["Dentista", "Designer"],
-        E: ["Engenheiro", "Enfermeiro", "Eletricista"],
-        F: ["Faxineiro", "Fotógrafo", "Farmacêutico"],
-        G: ["Garçom", "Gerente"],
-        H: ["Historiador"],
-        I: ["Instrutor", "Ilustrador"],
-        J: ["Jardineiro", "Jornalista", "Juiz"],
-        L: ["Locutor", "Lavrador"],
-        M: ["Médico", "Motorista", "Mecânico"],
-        P: ["Professor", "Programador", "Padeiro"],
-        R: ["Recepcionista", "Radialista"],
-        S: ["Soldador", "Secretária"],
-        T: ["Técnico", "Tradutor"],
-        V: ["Vendedor", "Veterinário"]
-      },
-
-      "App ou site": {
-        A: ["Amazon", "AliExpress"],
-        C: ["Canva", "ChatGPT"],
-        D: ["Duolingo", "Discord"],
-        F: ["Facebook"],
-        G: ["Google", "Gmail"],
-        I: ["Instagram", "iFood"],
-        L: ["LinkedIn"],
-        M: ["Mercado Livre"],
-        N: ["Netflix", "Notion"],
-        P: ["Pinterest", "Prime Video"],
-        S: ["Spotify", "Shein"],
-        T: ["TikTok", "Telegram"],
-        W: ["WhatsApp", "Wikipedia"],
-        Y: ["YouTube"]
-      },
-
-      "Ferramenta da Qualidade": {
-        B: ["Brainstorming"],
-        C: ["Check-list", "Ciclo PDCA"],
-        D: ["Diagrama de Ishikawa"],
-        F: ["Fluxograma", "Folha de verificação"],
-        G: ["Gráfico de Pareto"],
-        H: ["Histograma"],
-        I: ["Ishikawa"],
-        M: ["Matriz GUT"],
-        P: ["PDCA", "Pareto", "Plano de ação"],
-        Q: ["5W2H"],
-        S: ["5S"],
-      },
-
-      "Tema SENAI": {
-        A: ["Aprendizagem", "Análise de Dados"],
-        C: ["Curso", "Competência"],
-        D: ["Dados", "Desenvolvimento"],
-        E: ["Excel", "Eficiência", "Eficácia"],
-        F: ["Ferramentas"],
-        G: ["Gestão"],
-        I: ["Indicadores", "Indústria"],
-        K: ["KPI"],
-        O: ["OKR", "Organização"],
-        P: ["Produtividade", "Processo", "PDCA"],
-        Q: ["Qualidade"],
-        R: ["Responsabilidade"],
-        S: ["SENAI", "Sustentabilidade"],
-        T: ["Tecnologia", "Treinamento"]
-      },
-
-      "Palavra em inglês": {
-        A: ["Apple", "Animal"],
-        B: ["Book", "Blue"],
-        C: ["Car", "Cloud"],
-        D: ["Dog", "Data"],
-        E: ["English", "Earth"],
-        F: ["Friend", "Food"],
-        G: ["Game", "Green"],
-        H: ["House", "Heart"],
-        I: ["Image", "Internet"],
-        J: ["Job", "Jump"],
-        L: ["Love", "Light"],
-        M: ["Music", "Money"],
-        P: ["People", "Phone"],
-        S: ["School", "Sun"],
-        T: ["Time", "Tree"],
-        W: ["Water", "Work"]
-      }
-    };
-
-    const todasCategorias = Object.keys(banco);
-
-    function removerAcentos(texto) {
-      return texto
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim();
-    }
-
-    function sortearLetra() {
-      const letrasValidas = "ABCDEFGHIJKLMNOPRSTUV".split("");
-      letraAtual = letrasValidas[Math.floor(Math.random() * letrasValidas.length)];
-      document.getElementById("letra").textContent = letraAtual;
-    }
-
-    function sortearCategorias() {
-      const embaralhadas = [...todasCategorias].sort(() => Math.random() - 0.5);
-      categoriasDaRodada = embaralhadas.slice(0, 10);
-      const area = document.getElementById("categorias");
-      area.innerHTML = "";
-
-      categoriasDaRodada.forEach((categoria, index) => {
-        area.innerHTML += `
-          <div class="campo">
-            <label>${categoria}</label>
-            <input id="resposta-${index}" type="text" autocomplete="off">
-            <div class="status" id="status-${index}"></div>
-          </div>
-        `;
-      });
-    }
-
-    function novaRodada() {
-      clearInterval(intervalo);
-      document.getElementById("resultado").style.display = "none";
-      semLimiteDeTempo = false;
-      velocidade = 1000;
-      tempoTotal = Number(document.getElementById("modoTempo").value);
-      tempoRestante = tempoTotal;
-      document.getElementById("timer").textContent = tempoRestante;
-      sortearLetra();
-      sortearCategorias();
-    }
-
-    function iniciarTempo() {
-      clearInterval(intervalo);
-      semLimiteDeTempo = false;
-      tempoTotal = Number(document.getElementById("modoTempo").value);
-      tempoRestante = tempoTotal;
-      velocidade = 1000;
-      document.getElementById("timer").textContent = tempoRestante;
-      rodarTempo();
-    }
-
-    function rodarTempo() {
-      clearInterval(intervalo);
-      intervalo = setInterval(() => {
-        tempoRestante--;
-        document.getElementById("timer").textContent = tempoRestante;
-
-        if (tempoRestante <= 0) {
-          clearInterval(intervalo);
-          avaliar();
-          alert("Tempo acabou! Seu desempenho foi avaliado.");
-        }
-      }, velocidade);
-    }
-
-    function pausarTempo() {
-      clearInterval(intervalo);
-    }
-
-    function continuarTempo() {
-      if (!semLimiteDeTempo && tempoRestante > 0) {
-        rodarTempo();
-      }
-    }
-
-    function tempoLento() {
-      velocidade = 2500;
-      if (!semLimiteDeTempo && tempoRestante > 0) {
-        rodarTempo();
-      }
-    }
-
-    function semTempo() {
-      clearInterval(intervalo);
-      semLimiteDeTempo = true;
-      document.getElementById("timer").textContent = "Sem tempo";
-    }
-
-    function avaliar() {
-      clearInterval(intervalo);
-
-      let corretas = 0;
-      let preenchidas = 0;
-      let invalidas = 0;
-      let emBranco = 0;
-
-      categoriasDaRodada.forEach((categoria, index) => {
-        const input = document.getElementById(`resposta-${index}`);
-        const status = document.getElementById(`status-${index}`);
-        const resposta = input.value.trim();
-
-        const respostasValidas = banco[categoria][letraAtual] || [];
-        const respostasNormalizadas = respostasValidas.map(r => removerAcentos(r));
-
-        status.innerHTML = "";
-        status.className = "status";
-
-        if (resposta === "") {
-          emBranco++;
-          const sugestao = respostasValidas[0];
-
-          if (sugestao) {
-            input.value = sugestao;
-            status.innerHTML = `Sugestão: ${sugestao}`;
-            status.classList.add("sugestao");
-          } else {
-            status.innerHTML = "Sem sugestão cadastrada para esta letra.";
-            status.classList.add("errado");
-          }
-          return;
-        }
-
-        preenchidas++;
-
-        if (respostasNormalizadas.includes(removerAcentos(resposta))) {
-          corretas++;
-          status.innerHTML = "Resposta válida.";
-          status.classList.add("correto");
-        } else {
-          invalidas++;
-          const sugestoes = respostasValidas.slice(0, 3).join(", ");
-          status.innerHTML = sugestoes
-            ? `Não encontrei no banco. Sugestões: ${sugestoes}`
-            : "Não encontrei resposta cadastrada para esta categoria/letra.";
-          status.classList.add("errado");
-        }
-      });
-
-      const total = categoriasDaRodada.length;
-      const eficacia = Math.round((corretas / total) * 100);
-
-      let tempoUsado;
-      if (semLimiteDeTempo) {
-        tempoUsado = "sem limite";
-      } else {
-        tempoUsado = tempoTotal - tempoRestante;
-      }
-
-      let eficiencia;
-      if (semLimiteDeTempo) {
-        eficiencia = "modo treino";
-      } else {
-        eficiencia = Math.round(((tempoTotal - tempoRestante) / tempoTotal) * 100) + "% do tempo usado";
-      }
-
-      let produtividade;
-      if (semLimiteDeTempo) {
-        produtividade = `${corretas} respostas válidas`;
-      } else {
-        const minutos = Math.max((tempoTotal - tempoRestante) / 60, 0.1);
-        produtividade = (corretas / minutos).toFixed(1) + " respostas válidas/min";
-      }
-
-      let mensagem = "";
-
-      if (eficacia >= 80) {
-        mensagem = "Muito bom! Você conseguiu preencher a maior parte das categorias corretamente.";
-      } else if (eficacia >= 50) {
-        mensagem = "Bom treino. Você teve um desempenho intermediário e pode melhorar com prática.";
-      } else {
-        mensagem = "Você ainda está em fase de aquecimento. Use as sugestões para criar memória de respostas.";
-      }
-
-      document.getElementById("resultado").style.display = "block";
-      document.getElementById("resultado").innerHTML = `
-        <h2>Relatório de desempenho</h2>
-
-        <div class="metricas">
-          <div class="metrica">
-            Eficácia
-            <strong>${eficacia}%</strong>
-          </div>
-
-          <div class="metrica">
-            Eficiência
-            <strong>${eficiencia}</strong>
-          </div>
-
-          <div class="metrica">
-            Produtividade
-            <strong>${produtividade}</strong>
-          </div>
-        </div>
-
-        <p><strong>Respostas corretas:</strong> ${corretas}/${total}</p>
-        <p><strong>Respostas preenchidas:</strong> ${preenchidas}</p>
-        <p><strong>Respostas inválidas ou não cadastradas:</strong> ${invalidas}</p>
-        <p><strong>Campos em branco:</strong> ${emBranco}</p>
-        <p><strong>Tempo usado:</strong> ${tempoUsado}</p>
-        <p><strong>Análise:</strong> ${mensagem}</p>
-
-        <p><em>Observação: a validação depende do banco de respostas cadastrado. Se uma resposta sua estiver certa, mas não estiver no banco, o site pode marcar como não encontrada.</em></p>
-      `;
-    }
-
-    novaRodada();
-  </script>
 </body>
 </html>

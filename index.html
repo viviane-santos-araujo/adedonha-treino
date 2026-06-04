@@ -32,7 +32,6 @@ button,select{
   font-weight:bold;cursor:pointer;
 }
 button{background:white;color:#071735}
-button:hover{background:#dce6ff}
 .verde{background:#19d36b;color:white}
 .vermelho{background:#d31035;color:white}
 .categorias{
@@ -58,9 +57,9 @@ input{
 }
 .status{margin-top:7px;font-size:14px;min-height:20px}
 .confirmada{color:#5eff9b}
-.aceita{color:#9ee8ff}
+.revisar{color:#ffe56b}
 .errada{color:#ff8d8d}
-.sugestao{color:#ffe56b}
+.sugestao{color:#9ee8ff}
 .resultado{
   display:none;
   max-width:900px;
@@ -97,7 +96,7 @@ input{
 <body>
 
 <h1>Adedonha Treino</h1>
-<p class="subtitulo">Treine com tempo, pausa, sugestões e avaliação mais justa.</p>
+<p class="subtitulo">Agora com respostas confirmadas, respostas para revisar e inválidas reais.</p>
 
 <div class="letra" id="letra">?</div>
 <div class="timer" id="timer">60</div>
@@ -133,44 +132,54 @@ let semLimiteDeTempo = false;
 
 const banco = {
   "Nome feminino": {
-    A:["Ana","Amanda","Alice"], B:["Bianca","Bruna","Beatriz"], C:["Camila","Carla","Clara"],
-    J:["Joana","Juliana","Jéssica"], L:["Larissa","Luana","Lívia"], M:["Maria","Mariana","Marta"],
-    P:["Patrícia","Paula","Priscila"], S:["Sara","Samara","Sofia","Simone"], V:["Viviane","Vitória","Vanessa"]
+    A:["Ana","Amanda","Alice","Aline"], B:["Bianca","Bruna","Beatriz"],
+    C:["Camila","Carla","Clara","Cecília"], F:["Fernanda","Fabiana","Flávia"],
+    J:["Joana","Juliana","Jéssica"], L:["Larissa","Luana","Lívia"],
+    M:["Maria","Mariana","Marta"], P:["Patrícia","Paula","Priscila"],
+    S:["Sara","Samara","Sofia","Simone"], V:["Viviane","Vitória","Vanessa"]
   },
   "Nome masculino": {
-    A:["André","Arthur","Antônio"], C:["Carlos","Caio","César"], J:["João","José","Júlio"],
-    L:["Lucas","Luís","Leonardo"], M:["Marcos","Miguel","Mateus"], P:["Pedro","Paulo","Pablo"],
-    R:["Rafael","Ricardo","Renan"], S:["Samuel","Samir","Sandro","Sérgio"]
+    A:["André","Arthur","Antônio"], C:["Carlos","Caio","César"],
+    F:["Fernando","Felipe","Fábio"], J:["João","José","Júlio"],
+    L:["Lucas","Luís","Leonardo"], M:["Marcos","Miguel","Mateus"],
+    P:["Pedro","Paulo","Pablo"], R:["Rafael","Ricardo","Renan"],
+    S:["Samuel","Samir","Sandro","Sérgio"]
   },
   "País": {
     A:["Argentina","Angola","Austrália"], B:["Brasil","Bolívia","Bélgica"],
     C:["Canadá","Chile","China","Coreia do Sul","Coreia do Norte","Colômbia"],
-    J:["Japão","Jamaica","Jordânia"], P:["Portugal","Paraguai","Peru","Polônia","Panamá"],
+    F:["Finlândia","França","Filipinas"], J:["Japão","Jamaica","Jordânia"],
+    P:["Portugal","Paraguai","Peru","Polônia","Panamá"],
     S:["Suíça","Suécia","Senegal"]
   },
   "Animal": {
     A:["Arara","Anta","Abelha"], C:["Cachorro","Cavalo","Cobra"],
-    J:["Jiboia","Jacaré","Javali"], L:["Leão","Lobo","Lagarto"],
-    P:["Pato","Porco","Pinguim"], S:["Sapo","Serpente","Suricato","Sucuri"]
+    F:["Formiga","Foca","Flamingo"], J:["Jiboia","Jacaré","Javali"],
+    L:["Leão","Lobo","Lagarto"], P:["Pato","Porco","Pinguim"],
+    S:["Sapo","Serpente","Suricato","Sucuri"]
   },
   "Comida": {
     A:["Arroz","Acarajé","Abacate"], C:["Cuscuz","Carne","Chocolate","Caqui"],
-    J:["Jaca","Jiló"], L:["Lasanha","Laranja","Lentilha"],
+    F:["Farofa","Feijão","Frango","Fruta"], J:["Jaca","Jiló"],
+    L:["Lasanha","Laranja","Lentilha"],
     P:["Pizza","Pudim","Pão","Pistache","Pipoca","Peixe","Pastel"],
     S:["Sopa","Sorvete","Salada"]
   },
   "Objeto": {
-    C:["Caneta","Cadeira","Copo"], J:["Janela","Jarro"], L:["Lápis","Livro","Lanterna"],
-    P:["Pente","Prato","Panela","Pneu","Papel","Porta"], S:["Sapato","Sabonete"]
+    C:["Caneta","Cadeira","Copo"], F:["Fichário","Fone","Faca","Fogão"],
+    J:["Janela","Jarro"], L:["Lápis","Livro","Lanterna"],
+    P:["Pente","Prato","Panela","Pneu","Papel","Porta"],
+    S:["Sapato","Sabonete"]
   },
   "Vestuário": {
-    C:["Calça","Camisa","Casaco"], J:["Jaqueta","Jaleco"], L:["Luva","Lenço"],
+    C:["Calça","Camisa","Casaco"], F:["Faixa","Fantasia","Farda"],
+    J:["Jaqueta","Jaleco"], L:["Luva","Lenço"],
     P:["Pijama","Pulseira","Paletó"], S:["Saia","Sandália","Short","Sapato"]
   },
   "Profissão": {
     A:["Advogado","Analista","Arquiteto"], C:["Contador","Cozinheiro","Cantor"],
-    J:["Jardineiro","Jornalista","Juiz"], P:["Professor","Programador","Padeiro"],
-    S:["Soldador","Secretária","Sapateiro"]
+    F:["Fotógrafo","Farmacêutico","Faxineiro"], J:["Jardineiro","Jornalista","Juiz"],
+    P:["Professor","Programador","Padeiro"], S:["Soldador","Secretária","Sapateiro"]
   },
   "App ou site": {
     C:["Canva","ChatGPT"], G:["Google","Gmail"], I:["Instagram","iFood"],
@@ -178,21 +187,25 @@ const banco = {
     W:["WhatsApp","Wikipedia"], Y:["YouTube"]
   },
   "Ferramenta da Qualidade": {
-    B:["Brainstorming"], C:["Check-list","Ciclo PDCA"], D:["Diagrama de Ishikawa"],
-    F:["Fluxograma","Folha de verificação"], H:["Histograma"], M:["Matriz GUT"],
-    P:["PDCA","Pareto","Plano de ação"], Q:["5W2H"], S:["5S","Sistemas"]
+    B:["Brainstorming"], C:["Check-list","Ciclo PDCA"],
+    D:["Diagrama de Ishikawa"], F:["Fluxograma","Folha de verificação"],
+    H:["Histograma"], M:["Matriz GUT"], P:["PDCA","Pareto","Plano de ação"],
+    Q:["5W2H"], S:["5S"]
   },
   "Tema SENAI": {
     A:["Aprendizagem","Análise de Dados"], C:["Curso","Competência","Comunicação empresarial"],
-    E:["Excel","Eficiência","Eficácia"], G:["Gestão"], I:["Indicadores","Indústria"],
+    E:["Excel","Eficiência","Eficácia"], F:["Fluxograma","Ferramentas","Formação"],
+    G:["Gestão"], I:["Indicadores","Indústria"],
     P:["Produtividade","Processo","PDCA","Plataforma Inovação","Produção"],
-    Q:["Qualidade"], S:["SENAI","Sustentabilidade"], T:["Tecnologia","Treinamento"]
+    Q:["Qualidade"], S:["SENAI","Sustentabilidade","Sistemas"],
+    T:["Tecnologia","Treinamento"]
   },
   "Palavra em inglês": {
     A:["Apple","Animal"], B:["Book","Blue"], C:["Car","Cloud","Computer","Cat"],
-    D:["Dog","Data"], F:["Friend","Food"], L:["Love","Light"], M:["Music","Money"],
-    P:["People","Phone","Police","Power","Paper"], S:["School","Sun","System"],
-    T:["Time","Tree"], W:["Water","Work"]
+    D:["Dog","Data"], F:["Far","Friend","Food","Fire"],
+    L:["Love","Light"], M:["Music","Money"],
+    P:["People","Phone","Police","Power","Paper"],
+    S:["School","Sun","System"], T:["Time","Tree"], W:["Water","Work"]
   }
 };
 
@@ -207,6 +220,10 @@ function normalizar(txt){
 
 function comecaComLetraCerta(resp){
   return normalizar(resp).startsWith(normalizar(letraAtual));
+}
+
+function temTamanhoMinimo(resp){
+  return normalizar(resp).length >= 2;
 }
 
 function sortearLetra(){
@@ -287,7 +304,7 @@ function avaliar(){
   clearInterval(intervalo);
 
   let confirmadas=0;
-  let aceitas=0;
+  let revisar=0;
   let invalidas=0;
   let emBranco=0;
   let preenchidas=0;
@@ -322,47 +339,47 @@ function avaliar(){
 
     if(validasNorm.includes(normalizar(resp))){
       confirmadas++;
-      status.innerHTML="Confirmada: está no banco de respostas.";
+      status.innerHTML="Confirmada: está no banco da categoria.";
       status.className="status confirmada";
       return;
     }
 
-    if(comecaComLetraCerta(resp)){
-      aceitas++;
-      status.innerHTML="Aceita: começa com a letra correta, mesmo não estando no banco.";
-      status.className="status aceita";
+    if(!temTamanhoMinimo(resp)){
+      invalidas++;
+      status.innerHTML="Inválida: resposta curta demais.";
+      status.className="status errada";
       return;
     }
 
-    invalidas++;
-    status.innerHTML=`Inválida: não começa com a letra ${letraAtual}.`;
-    status.className="status errada";
+    if(!comecaComLetraCerta(resp)){
+      invalidas++;
+      status.innerHTML=`Inválida: não começa com a letra ${letraAtual}.`;
+      status.className="status errada";
+      return;
+    }
+
+    revisar++;
+    status.innerHTML="Para revisar: começa com a letra correta, mas não está no banco da categoria.";
+    status.className="status revisar";
   });
 
   const total = categoriasDaRodada.length;
-  const corretasTotais = confirmadas + aceitas;
-  const eficacia = Math.round((corretasTotais / total) * 100);
+  const acertosConfirmados = confirmadas;
+  const possiveisAcertos = confirmadas + revisar;
+  const eficaciaConfirmada = Math.round((acertosConfirmados / total) * 100);
+  const eficaciaPossivel = Math.round((possiveisAcertos / total) * 100);
 
   let tempoUsado, eficiencia, produtividade;
 
   if(semLimiteDeTempo){
     tempoUsado="sem limite";
     eficiencia="modo treino";
-    produtividade=`${corretasTotais} respostas aceitas`;
+    produtividade=`${possiveisAcertos} respostas possíveis`;
   }else{
     tempoUsado = tempoTotal - tempoRestante;
     eficiencia = Math.round((tempoUsado / tempoTotal) * 100) + "% do tempo usado";
     const minutos = Math.max(tempoUsado / 60, 0.1);
-    produtividade = (corretasTotais / minutos).toFixed(1) + " respostas aceitas/min";
-  }
-
-  let mensagem = "";
-  if(eficacia >= 80){
-    mensagem = "Excelente! Você teve alto aproveitamento na rodada.";
-  }else if(eficacia >= 50){
-    mensagem = "Bom treino. Você conseguiu responder uma parte importante das categorias.";
-  }else{
-    mensagem = "Rodada difícil. Use as sugestões para ampliar seu repertório.";
+    produtividade = (possiveisAcertos / minutos).toFixed(1) + " respostas possíveis/min";
   }
 
   document.getElementById("resultado").style.display="block";
@@ -370,21 +387,20 @@ function avaliar(){
     <h2>Relatório de desempenho</h2>
 
     <div class="metricas">
-      <div class="metrica">Eficácia<strong>${eficacia}%</strong></div>
-      <div class="metrica">Eficiência<strong>${eficiencia}</strong></div>
+      <div class="metrica">Eficácia confirmada<strong>${eficaciaConfirmada}%</strong></div>
+      <div class="metrica">Eficácia possível<strong>${eficaciaPossivel}%</strong></div>
       <div class="metrica">Produtividade<strong>${produtividade}</strong></div>
     </div>
 
-    <p><strong>Respostas confirmadas no banco:</strong> ${confirmadas}</p>
-    <p><strong>Respostas aceitas pela letra:</strong> ${aceitas}</p>
-    <p><strong>Total aceito:</strong> ${corretasTotais}/${total}</p>
-    <p><strong>Respostas preenchidas:</strong> ${preenchidas}</p>
+    <p><strong>Confirmadas no banco:</strong> ${confirmadas}</p>
+    <p><strong>Para revisar:</strong> ${revisar}</p>
+    <p><strong>Inválidas reais:</strong> ${invalidas}</p>
     <p><strong>Campos em branco:</strong> ${emBranco}</p>
-    <p><strong>Inválidas de verdade:</strong> ${invalidas}</p>
+    <p><strong>Respostas preenchidas:</strong> ${preenchidas}</p>
     <p><strong>Tempo usado:</strong> ${tempoUsado}</p>
-    <p><strong>Análise:</strong> ${mensagem}</p>
+    <p><strong>Eficiência:</strong> ${eficiencia}</p>
 
-    <p><em>Observação: agora o banco serve como referência e sugestão. Uma resposta sua não será considerada incorreta só por não estar cadastrada.</em></p>
+    <p><em>Observação: “para revisar” significa que a palavra começa corretamente, mas o site não consegue garantir sozinho que pertence à categoria.</em></p>
   `;
 }
 
